@@ -24,4 +24,6 @@ public class KlassTest {
         //Then
         assertEquals(studentInfos.size(), 2);
     }
+
+
 }

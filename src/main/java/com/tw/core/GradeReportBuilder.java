@@ -16,7 +16,7 @@ public class GradeReportBuilder {
     public Gradereport buildIndicatedStuReport(List<StudentInfo> stuLIst) {
         Gradereport gradereport = new Gradereport();
         gradereport.setStudentGradeItems(this.klass.getAllStudent().stream()
-                .filter(s -> stuLIst.stream().anyMatch(indicatedStu -> indicatedStu.getNumber() == s.getNumber()))
+                .filter(s -> stuLIst.stream().anyMatch(indicatedStu -> indicatedStu.getNumber().equals(s.getNumber())))
                 .map(s -> new StudentGradeItem(
                         s.getName(),
                         s.getNumber(),

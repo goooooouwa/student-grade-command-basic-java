@@ -3,6 +3,7 @@ package com.tw.transform;
 import com.tw.core.Gradereport;
 import com.tw.core.StudentGradeItem;
 import com.tw.core.StudentInfo;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
@@ -14,13 +15,22 @@ import static org.junit.Assert.assertEquals;
  * Created by jxzhong on 2017/8/31.
  */
 public class InputTransformerTest {
+
+
+    private InputTransformer inputTransformer;
+
+    @Before
+    public void setUp() throws Exception {
+        inputTransformer = new InputTransformer();
+    }
+
     @Test
     public void should_get_stu_when_input_correct_text() throws Exception {
         //Given
         String studentInfoInput = "Jason，122，数学：100，语文：99，英语：92，编程：100";
 
         //When
-        StudentInfo StudentInfo = Transformer.formatStudentInfo(studentInfoInput);
+        StudentInfo StudentInfo = inputTransformer.formatStudentInfo(studentInfoInput);
 
         //Then
         assertEquals(StudentInfo.getName(), "Jason");
@@ -32,12 +42,25 @@ public class InputTransformerTest {
     }
 
     @Test
-    public void shoud_get_stu_list_when_input_num_text() throws Exception {
+    public void shoud_get_empty_stu_list_when_input_no_match_input() throws Exception {
         //Given
-        String StudentInfoInput = "122 , 2";
+        String StudentInfoInput = "1, any wrong input";
 
         //When
-        List<StudentInfo> stus = Transformer.formatStudentNos(StudentInfoInput);
+        List<StudentInfo> stus = inputTransformer.formatStudentNos(StudentInfoInput);
+
+        //Then
+        assertEquals(0, stus.size());
+    }
+
+
+    @Test
+    public void shoud_get_stu_list_when_input_num_text() throws Exception {
+        //Given
+        String StudentInfoInput = "122, 12";
+
+        //When
+        List<StudentInfo> stus = inputTransformer.formatStudentNos(StudentInfoInput);
 
         //Then
         assertEquals(stus.size(), 2);
@@ -63,7 +86,7 @@ public class InputTransformerTest {
                 new StudentGradeItem("李四", "222", 85, 80, 70, 81)));
 
         //When
-        String reportText = Transformer.formatReportText(report);
+        String reportText = inputTransformer.formatReportText(report);
 
         //Then
         assertEquals(reportText, reportTextOrigin);
