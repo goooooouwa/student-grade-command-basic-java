@@ -35,38 +35,39 @@ public class CmdEntryTest {
     }
 
     @Test
-    public void should_return_add_student_print_msg_when_input_1() throws Exception {
+    public void should_return_add_student_print_output_when_input_1() throws Exception {
         //Given
         //When
         commandHandler.execute("-1");
-        String msg = commandHandler.execute("1");
+        CmdParam param = commandHandler.execute("1");
         //Then
-        assertThat(msg, is("请输入学生信息（格式：姓名, 学号，数学：分数，语文：分数，英语：分数，编程：分数），按回车提交："));
+        assertThat(param.getOutput(), is("请输入学生信息（格式：姓名, 学号，数学：分数，语文：分数，英语：分数，编程：分数），按回车提交：\n"));
+
     }
 
     @Test
-    public void should_return_add_stu_input_error_msg_when_input_1_and_then_wrong_stu_info() throws Exception {
+    public void should_return_add_stu_input_error_output_when_input_1_and_then_wrong_stu_info() throws Exception {
         //Given
         commandHandler.execute("-1");
         commandHandler.execute("1");
         //When
 
-        String msg = commandHandler.execute("anything wrong format input");
+        CmdParam param  = commandHandler.execute("anything wrong format input");
         //Then
-        assertThat(msg, is("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交："));
+        assertThat(param.getOutput(), is("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：\n"));
     }
 
     @Test
-    public void should_return_main_menu_msg_when_input_1_and_then_correct_stu_info() throws Exception {
+    public void should_return_main_menu_output_when_input_1_and_then_correct_stu_info() throws Exception {
         //Given
         commandHandler.execute("-1");
         commandHandler.execute("1");
         when(this.inputTransformer.formatStudentInfo(any())).thenReturn(new StudentInfo("122"));
         ;
         //When
-        String msg = commandHandler.execute("Jason，122，数学：100，语文：99，英语：92，编程：100");
+        CmdParam param  = commandHandler.execute("Jason，122，数学：100，语文：99，英语：92，编程：100");
         //Then
-        assertThat(msg, is("***********\n" +
+        assertThat(param.getOutput(), is("\n***********\n" +
                 "1. 添加学生\n" +
                 "2. 生成成绩单\n" +
                 "3. 退出\n" +
@@ -76,12 +77,12 @@ public class CmdEntryTest {
     }
 
     @Test
-    public void should_return_main_menus_print_msg_when_input_0() throws Exception {
+    public void should_return_main_menus_print_output_when_input_0() throws Exception {
         //Given
         //When
-        String msg = commandHandler.execute("-1");
+        CmdParam param  = commandHandler.execute("-1");
         //Then
-        assertThat(msg, is("***********\n" +
+        assertThat(param.getOutput(), is("\n***********\n" +
                 "1. 添加学生\n" +
                 "2. 生成成绩单\n" +
                 "3. 退出\n" +
@@ -90,29 +91,29 @@ public class CmdEntryTest {
     }
 
     @Test
-    public void should_return_gen_score_sheet_print_msg_when_input_2() throws Exception {
+    public void should_return_gen_score_sheet_print_output_when_input_2() throws Exception {
         //Given
         commandHandler.execute("-1");
         //When
-        String msg = commandHandler.execute("2");
+        CmdParam param  = commandHandler.execute("2");
         //Then
-        assertThat(msg, is("请输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交："));
+        assertThat(param.getOutput(), is("请输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：\n"));
     }
 
     @Test
-    public void should_return_input_num_format_error_msg_when_input_2_then_wrong_input() throws Exception {
+    public void should_return_input_num_format_error_output_when_input_2_then_wrong_input() throws Exception {
         //Given
         commandHandler.execute("-1");
         commandHandler.execute("2");
         when(this.inputTransformer.formatStudentNos(any())).thenReturn(anyListOf(StudentInfo.class));
         //When
-        String msg = commandHandler.execute("anything is wrong format");
+        CmdParam param  = commandHandler.execute("anything is wrong format");
         //Then
-        assertThat(msg, is("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交："));
+        assertThat(param.getOutput(), is("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：\n"));
     }
 
     @Test
-    public void should_return_input_num_format_error_msg_when_input_2_then_correct_input() throws Exception {
+    public void should_return_input_num_format_error_output_when_input_2_then_correct_input() throws Exception {
         //Given
         String printReportText = "成绩单\n" +
                 "姓名|数学|语文|英语|编程|平均分|总分 \n" +
@@ -128,10 +129,10 @@ public class CmdEntryTest {
         when(this.inputTransformer.formatStudentNos(any())).thenReturn(Arrays.asList(
                 new StudentInfo("122"), new StudentInfo("223")));
         //When
-        String msg = commandHandler.execute("112, 223");
+        CmdParam param  = commandHandler.execute("112, 223");
         //Then
         verify(this.inputTransformer, times(1)).formatStudentNos(any());
-        assertThat(msg, containsString(printReportText));
+        assertThat(param.getOutput(), containsString(printReportText));
         ;
     }
 }

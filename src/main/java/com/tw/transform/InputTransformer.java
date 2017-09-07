@@ -49,8 +49,10 @@ public class InputTransformer {
         if (!isMatche) {
             return stus;
         }
-        stus = Arrays.asList(input.split(",")).stream()
-                .map(num -> new StudentInfo(num.trim()))
+        stus = Arrays.asList(input.trim().split(",")).stream()
+                .map(num -> num.trim())
+                .distinct()
+                .map(num -> new StudentInfo(num))
                 .collect(Collectors.toList());
 
         return stus;

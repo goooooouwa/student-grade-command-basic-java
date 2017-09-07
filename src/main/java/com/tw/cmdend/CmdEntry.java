@@ -25,72 +25,89 @@ public class CmdEntry {
         this.inputTransformer = inputTransformer;
     }
 
-    public String execute(String input) {
+    public CmdParam execute(String input) {
 
-        String printMsg = "";
+        CmdParam param = new CmdParam();
         String nextStatus = this.cmdStatusManager.getNextStatus(input);
         switch (nextStatus) {
             case MAIN_MENU_STATUS:
-                printMsg = MAIN_MENU_MSG;
+                param = handleMainMenuPage(nextStatus);
                 break;
             case ADD_STUDENT_STATUS:
-                printMsg = handleStudentAddStatus(input, nextStatus);
+                param = handleStudentAddPage(input, nextStatus);
                 break;
             case PRINT_REPORT_STATUS:
-                printMsg = handlePrintReportStatus(input, nextStatus);
+                param = handlePrintReportPage(input, nextStatus);
                 break;
         }
 
-        this.cmdStatusManager.setCurrentStatue(nextStatus);
-        return printMsg;
-
+        this.cmdStatusManager.setCurrentStatue(param.getStatus());
+        return param;
     }
 
-    private String handlePrintReportStatus(String input, String nextStatus) {
-        String printMsg;
-        if (this.cmdStatusManager.isTheSameStatus(nextStatus)) {
-            printMsg = PRINT_REPORT_MSG;
+    private CmdParam handleMainMenuPage(String nextStatus) {
+        if (cmdStatusManager.isTheSameStatus(nextStatus)) {
+            return handlePageDisplay(MAIN_MENU_STATUS, "");
         } else {
-            printMsg = handleGradeReport(input);
+            return handlePageDisplay(MAIN_MENU_STATUS, MAIN_MENU_MSG);
         }
-        return printMsg;
+
     }
 
-    private String handleStudentAddStatus(String input, String nextStatus) {
-        String printMsg;
+    private CmdParam handlePrintReportPage(String input, String nextStatus) {
+        CmdParam cmdParam;
         if (this.cmdStatusManager.isTheSameStatus(nextStatus)) {
-            printMsg = ADD_STUDENT_INFO_MSG;
-            this.cmdStatusManager.setCurrentStatue(nextStatus);
+
+            cmdParam = handleGradeReport(input, nextStatus);
         } else {
-            printMsg = handleSudentAdding(input);
+            cmdParam = handlePageDisplay(nextStatus, PRINT_REPORT_MSG);
         }
-        return printMsg;
+        return cmdParam;
     }
 
-    private String handleGradeReport(String input) {
-        String printMsg;
+    private CmdParam handleStudentAddPage(String input, String nextStatus) {
+        CmdParam cmdParam;
+        if (this.cmdStatusManager.isTheSameStatus(nextStatus)) {
+
+            cmdParam = handleSudentAdding(input, nextStatus);
+        } else {
+            cmdParam = handlePageDisplay(nextStatus, ADD_STUDENT_INFO_MSG);
+        }
+        return cmdParam;
+    }
+
+    private CmdParam handlePageDisplay(String nextStatus, String addStudentInfoMsg) {
+        CmdParam cmdParam = new CmdParam();
+        cmdParam.setOutput(addStudentInfoMsg);
+        cmdParam.setStatus(nextStatus);
+        return cmdParam;
+    }
+
+    private CmdParam handleGradeReport(String input, String nextStatus) {
+        CmdParam cmdParam;
         List<StudentInfo> studentInfos = this.inputTransformer.formatStudentNos(input);
         if (studentInfos.isEmpty()) {
-            printMsg = STUDENG_ADD_ERROR_MSG;
+            cmdParam = handlePageDisplay(nextStatus, STUDENG_ADD_ERROR_MSG);
         } else {
             Gradereport gradereport = studentGradeService.generateReport(studentInfos);
-            printMsg = this.inputTransformer.formatReportText(gradereport);
-            printMsg += MAIN_MENU_MSG;
+            String displayMsg = this.inputTransformer.formatReportText(gradereport) + MAIN_MENU_MSG;
+            cmdParam = handlePageDisplay(MAIN_MENU_STATUS, displayMsg);
         }
-        return printMsg;
+        return cmdParam;
     }
 
-    private String handleSudentAdding(String input) {
-        String printMsg;
+    private CmdParam handleSudentAdding(String input, String nextStatus) {
+        CmdParam cmdParam;
         StudentInfo studentInfo = this.inputTransformer.formatStudentInfo(input);
         if (studentInfo == null) {
-            printMsg = ADD_STUDENT_ERROR_MSG;
+            cmdParam = handlePageDisplay(nextStatus, ADD_STUDENT_ERROR_MSG);
         } else {
             studentGradeService.addStudent(studentInfo);
-            printMsg = MAIN_MENU_MSG;
+            cmdParam = handlePageDisplay(nextStatus, MAIN_MENU_MSG);
+
 
         }
-        return printMsg;
+        return cmdParam;
     }
 
 }

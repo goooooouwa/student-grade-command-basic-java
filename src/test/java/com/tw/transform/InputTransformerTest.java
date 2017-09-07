@@ -67,6 +67,19 @@ public class InputTransformerTest {
         assertEquals(stus.get(0).getNumber(), "122");
     }
 
+    @Test
+    public void shoud_get_deduplicated_stu_list_when_input_repeat_nums_text() throws Exception {
+        //Given
+        String StudentInfoInput = "122, 12, 122";
+
+        //When
+        List<StudentInfo> stus = inputTransformer.formatStudentNos(StudentInfoInput);
+
+        //Then
+        assertEquals(stus.size(), 2);
+        assertEquals(stus.get(0).getNumber(), "122");
+    }
+
 
     @Test
     public void shoud_get_report_format_when_input_correct_report() throws Exception {

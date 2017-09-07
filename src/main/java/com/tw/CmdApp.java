@@ -24,10 +24,10 @@ public class CmdApp {
             String inputToCmd = MAIN_MENU_DISPLAY_COMMAND;
             do {
 
-                System.out.println(cmdEntry.execute(inputToCmd));
+                System.out.println(cmdEntry.execute(inputToCmd).getOutput());
                 inputToCmd = sc.nextLine();
             }
-            while (inputToCmd != CMD_APP_EXIT);
+            while (!inputToCmd.equals(CMD_APP_EXIT));
         } catch (Exception e) {
             System.out.println("\n App Exist");
         } finally {

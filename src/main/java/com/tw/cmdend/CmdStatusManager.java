@@ -37,7 +37,7 @@ public class CmdStatusManager {
     }
 
     public boolean isTheSameStatus(String nextStatus) {
-        return this.currentStatue != nextStatus;
+        return nextStatus.equals(this.currentStatue);
 
     }
 }
