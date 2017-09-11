@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 /**
  * Created by jxzhong on 2017/8/31.
  */
-public class InputTransformer {
+public class CmdIOTransformer {
 
     private static final String STU_REGREX = "([^，]+)，(\\w+)，数学：(\\d+)，语文：(\\d+)，英语：(\\d+)，编程：(\\d+)";
     private static final String STU_NUM_REGREX = "^(\\d+[\\s]*+[,]+[\\s]*)*(\\d+)$";

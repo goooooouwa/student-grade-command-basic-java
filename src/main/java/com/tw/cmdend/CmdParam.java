@@ -15,10 +15,6 @@ public class CmdParam {
         this.status = status;
     }
 
-    public void appendOutput(String mainMenuMsg) {
-        this.output += mainMenuMsg;
-    }
-
     public String getStatus() {
         return status;
     }

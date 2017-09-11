@@ -3,7 +3,7 @@ package com.tw.cmdend;
 import com.tw.core.Gradereport;
 import com.tw.core.StudentInfo;
 import com.tw.service.StudentGradeService;
-import com.tw.transform.InputTransformer;
+import com.tw.transform.CmdIOTransformer;
 
 import java.util.List;
 
@@ -15,11 +15,11 @@ import static com.tw.cmdend.CmdStatusManager.*;
  */
 public class CmdEntry {
 
-    private final InputTransformer inputTransformer;
+    private final CmdIOTransformer inputTransformer;
     private StudentGradeService studentGradeService;
     private final CmdStatusManager cmdStatusManager;
 
-    public CmdEntry(StudentGradeService studentGradeService, InputTransformer inputTransformer) {
+    public CmdEntry(StudentGradeService studentGradeService, CmdIOTransformer inputTransformer) {
         this.studentGradeService = studentGradeService;
         this.cmdStatusManager = new CmdStatusManager();
         this.inputTransformer = inputTransformer;
@@ -104,8 +104,6 @@ public class CmdEntry {
         } else {
             studentGradeService.addStudent(studentInfo);
             cmdParam = handlePageDisplay(nextStatus, MAIN_MENU_MSG);
-
-
         }
         return cmdParam;
     }

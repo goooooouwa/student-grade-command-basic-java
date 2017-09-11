@@ -4,7 +4,7 @@ import com.tw.cmdend.CmdEntry;
 import com.tw.core.GradeReportBuilder;
 import com.tw.core.Klass;
 import com.tw.service.StudentGradeService;
-import com.tw.transform.InputTransformer;
+import com.tw.transform.CmdIOTransformer;
 
 import java.util.Scanner;
 
@@ -39,7 +39,7 @@ public class CmdApp {
         Klass klass = new Klass();
         GradeReportBuilder gradeReportBuilder = new GradeReportBuilder(klass);
         StudentGradeService studentGradeService = new StudentGradeService(klass, gradeReportBuilder);
-        InputTransformer inputTransformer = new InputTransformer();
+        CmdIOTransformer inputTransformer = new CmdIOTransformer();
         return new CmdEntry(studentGradeService, inputTransformer);
     }
 }

@@ -14,14 +14,14 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by jxzhong on 2017/8/31.
  */
-public class InputTransformerTest {
+public class CmdIOTransformerTest {
 
 
-    private InputTransformer inputTransformer;
+    private CmdIOTransformer inputTransformer;
 
     @Before
     public void setUp() throws Exception {
-        inputTransformer = new InputTransformer();
+        inputTransformer = new CmdIOTransformer();
     }
 
     @Test

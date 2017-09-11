@@ -2,7 +2,7 @@ package com.tw.cmdend;
 
 import com.tw.core.StudentInfo;
 import com.tw.service.StudentGradeService;
-import com.tw.transform.InputTransformer;
+import com.tw.transform.CmdIOTransformer;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -27,7 +27,7 @@ public class CmdEntryTest {
     @Mock
     private StudentGradeService mockStudentGradeService;
     @Mock
-    private InputTransformer inputTransformer;
+    private CmdIOTransformer inputTransformer;
 
     @Before
     public void setUp() throws Exception {
@@ -42,6 +42,17 @@ public class CmdEntryTest {
         CmdParam param = commandHandler.execute("1");
         //Then
         assertThat(param.getOutput(), is("请输入学生信息（格式：姓名, 学号，数学：分数，语文：分数，英语：分数，编程：分数），按回车提交：\n"));
+
+    }
+
+    @Test
+    public void should_return_empty_msg_print_output_when_input_error_order() throws Exception {
+        //Given
+        //When
+        commandHandler.execute("-1");
+        CmdParam param = commandHandler.execute("error order");
+        //Then
+        assertThat(param.getOutput(), is(""));
 
     }
 
