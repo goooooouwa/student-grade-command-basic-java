@@ -87,5 +87,10 @@
 
 ## 学习资源
 
-- 任务分解：https://www.zybuluo.com/jtong/note/504192
+1. [任务分解](https://www.zybuluo.com/jtong/note/504192)
+2. [Gradle基础教程](http://tutorials.jenkov.com/gradle/gradle-tutorial.html)
+3. [Java 基础](http://www.runoob.com/java/java-tutorial.html)
+4. [Git 参考手册](http://gitref.org/zh/index.html)
+5. [Junit](http://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions)
+6. [Mockito](http://site.mockito.org/)
 
