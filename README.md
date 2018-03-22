@@ -1,13 +1,14 @@
-# 学生成绩单（命令行版）
+# Java综合练习
 
-## 练习要求
+### 练习描述
 
 我们现在做一个应用，该应用是一个命令行应用。当程序启动的时候，我们会看到一个命令行的主界面：
 
 ```
 1. 添加学生
 2. 生成成绩单
-3. 退出请输入你的选择（1～3）：
+3. 退出
+请输入你的选择（1～3）：
 ```
 
 如果我们输入1，那么界面就会变成：
@@ -70,27 +71,17 @@
 - 列出任务列表（包含预估完成时间）
 - 写测试用例
 
-### 输出结果
+### 环境要求
+- java 8
 
-将个人练习代码库地址提交到教练指定的位置。
+### 如何开始：
 
-代码库需包含：
+- clone 题目模板地址
+- 打开并修改项目文件，完成练习。
 
-1. 任务分解图的tasking.md文件
-2. 说明如何运行和测试代码的README.md文件
-3. 运行结果截图的result.png文件
+### 输出规范
 
-## 如何开始：
-
-1. `git clone https://github.com/tws-online-quiz/student-grade-command-basic-java`
-2. 打开并修改项目文件，完成练习。
-
-## 学习资源
-
-1. [任务分解](https://www.zybuluo.com/jtong/note/504192)
-2. [Gradle基础教程](http://tutorials.jenkov.com/gradle/gradle-tutorial.html)
-3. [Java 基础](http://www.runoob.com/java/java-tutorial.html)
-4. [Git 参考手册](http://gitref.org/zh/index.html)
-5. [Junit](http://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions)
-6. [Mockito](http://site.mockito.org/)
-
+- 使用 Java8 完成上述需求
+- 任务分解图的tasking.md文件
+- 说明如何运行和测试代码的README.md文件
+- 运行结果截图的result.png文件

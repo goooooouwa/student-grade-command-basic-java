@@ -103,6 +103,7 @@ public class CmdEntry {
             cmdParam = handlePageDisplay(nextStatus, ADD_STUDENT_ERROR_MSG);
         } else {
             studentGradeService.addStudent(studentInfo);
+            System.out.println("学生"+studentInfo.getName()+"的成绩被添加");
             cmdParam = handlePageDisplay(nextStatus, MAIN_MENU_MSG);
         }
         return cmdParam;
