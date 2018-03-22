@@ -27,7 +27,7 @@ public class CmdIOTransformerTest {
     @Test
     public void should_get_stu_when_input_correct_text() throws Exception {
         //Given
-        String studentInfoInput = "Jason，122，数学：100，语文：99，英语：92，编程：100";
+        String studentInfoInput = "Jason, 122, 数学：100, 语文：99, 英语：92, 编程：100";
 
         //When
         StudentInfo StudentInfo = inputTransformer.formatStudentInfo(studentInfoInput);

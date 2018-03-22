@@ -41,7 +41,7 @@ public class CmdEntryTest {
         commandHandler.execute("-1");
         CmdParam param = commandHandler.execute("1");
         //Then
-        assertThat(param.getOutput(), is("请输入学生信息（格式：姓名, 学号，数学：分数，语文：分数，英语：分数，编程：分数），按回车提交：\n"));
+        assertThat(param.getOutput(), is("请输入学生信息（格式：姓名, 学号, 数学：分数, 语文：分数, 英语：分数, 编程：分数），按回车提交：\n"));
 
     }
 
@@ -65,7 +65,7 @@ public class CmdEntryTest {
 
         CmdParam param  = commandHandler.execute("anything wrong format input");
         //Then
-        assertThat(param.getOutput(), is("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：\n"));
+        assertThat(param.getOutput(), is("请按正确的格式输入（格式：姓名, 学号, 学科：成绩,...），按回车提交：\n"));
     }
 
     @Test
@@ -108,7 +108,7 @@ public class CmdEntryTest {
         //When
         CmdParam param  = commandHandler.execute("2");
         //Then
-        assertThat(param.getOutput(), is("请输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：\n"));
+        assertThat(param.getOutput(), is("请输入要打印的学生的学号（格式：学号, 学号,...），按回车提交：\n"));
     }
 
     @Test
@@ -120,7 +120,7 @@ public class CmdEntryTest {
         //When
         CmdParam param  = commandHandler.execute("anything is wrong format");
         //Then
-        assertThat(param.getOutput(), is("请按正确的格式输入要打印的学生的学号（格式： 学号, 学号,...），按回车提交：\n"));
+        assertThat(param.getOutput(), is("请按正确的格式输入要打印的学生的学号（格式：学号, 学号,...），按回车提交：\n"));
     }
 
     @Test
