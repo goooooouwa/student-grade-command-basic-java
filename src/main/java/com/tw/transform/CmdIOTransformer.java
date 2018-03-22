@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
  */
 public class CmdIOTransformer {
 
-    private static final String STU_REGREX = "([^，]+)，(\\w+)，数学：(\\d+)，语文：(\\d+)，英语：(\\d+)，编程：(\\d+)";
+    private static final String STU_REGREX = "([^, ]+), (\\w+), 数学：(\\d+), 语文：(\\d+), 英语：(\\d+), 编程：(\\d+)";
     private static final String STU_NUM_REGREX = "^(\\d+[\\s]*+[,]+[\\s]*)*(\\d+)$";
     private static final String reportTemplate = "成绩单\n" +
             "姓名|数学|语文|英语|编程|平均分|总分 \n" +
